@@ -5,6 +5,7 @@
 </template>
 
 <script>
+
 import { TweenMax, TimelineMax, Power3, CSSPlugin } from "gsap";
 
 export default {
