@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import { TimelineMax, gsap } from "gsap";
+import { TweenMax, TimelineMax, Power3, CSSPlugin } from "gsap";
 import RadialProgressBar from 'vue-radial-progress'
 export default {
     data: function () {

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { TimelineMax } from "gsap";
+import { TweenMax, TimelineMax, Power3, CSSPlugin } from "gsap";
 
 export default {
     name: 'slider',

@@ -30,7 +30,10 @@
 
 <script>
 
-import { TimelineMax, gsap } from "gsap";
+import { TweenMax, TimelineMax, Power3, CSSPlugin } from "gsap";
+
+
+
 export default {
     name: 'interactive',
  
