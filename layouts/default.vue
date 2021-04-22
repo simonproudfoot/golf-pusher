@@ -1,7 +1,8 @@
 <template>
   <div id="app">
+    <h1>Home page</h1>
     <h1 class="text-white testTimer">{{tick}}</h1>
-    ive changed
+    
     <Nuxt />
   </div>
 </template>

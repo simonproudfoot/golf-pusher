@@ -12,7 +12,6 @@ export default {
         routes() { return this.$router.getRoutes() }
     }
 }
-
 </script>
 
 <style>
