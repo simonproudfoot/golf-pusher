@@ -19,6 +19,7 @@ export default {
   },
 
   server: {
+
     host: '0',
   },   // other configs 
 
@@ -52,20 +53,21 @@ export default {
     '@nuxtjs/style-resources',
     
   ],
-  io: {
-    // module options  
-    sockets: [{
-      name: 'main',
-      url: 'https://nuxt-golf.herokuapp.com'
-    }]
-  },
+  // ADD IN LOCAL VERSION
+  // io: {
+  //   // module options  
+  //   sockets: [{
+  //     name: 'main',
+  //     url: 'http://192.168.1.233:3001'
+  //   }]
+  // },
 
 
   styleResources: {
     scss: ['./assets/scss/*.scss']
   },
 
-
+  // ADD IN ONLINB VERSION
   serverMiddleware: ["~/serverMiddleware/socket-io-server.js"],
 
 
