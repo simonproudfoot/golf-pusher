@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/iwasthere", {data:[{}],fetch:{},mutations:[]});
