@@ -5,6 +5,7 @@ export const state = () => ({
     screenMode: '',
     view: 'main',
     story: null,
+    interactiveKey: 0,
     iWasThere: [{
       thumb: 'test/testThumb.jpg',
       title: 'Jack Nicklaus v Doug Sanders, 1970',
@@ -54,7 +55,7 @@ export const state = () => ({
       thumb: 'test/testThumb.jpg',
       title: 'Tiger Woods, 2006',
       heading: `<h1 class="text-7xl year">2006</h1><h1 class="text-9xl">TIGER</h1><h1 class="text-9xl">WOODS</h1>`,
-      video: 'AV 5.1.1_Tiger Woods, 2006',
+      video: 'AV 5.1.1_Tiger Woods, 2006.mp4',
       image: '',
       text: 'Woods claims a second successive victory at Hoylake, ‘blown upon by mighty winds, breeder of mighty champions.’  An emotional victory coming just two months after the death of his father, Earl.'
     },
@@ -91,7 +92,7 @@ export const state = () => ({
       thumb: 'test/testThumb.jpg',
       title: 'Shane Lowry, 2019',
       heading: `<h1 class="text-7xl year">1995</h1><h1 class="text-9xl">SHANE</h1><h1 class="text-9xl">LOWRY</h1>`,
-      video: '2019Shane Lowry.mp4',
+      video: 'AV 5.1.1_Shane Lowry, 2019.mp4',
       image: '',
       text: 'It is 68 years since the Open has been played in Northern Ireland.  On the 18th spectators rush to witness home favourite Shane Lowry sink the winning putt and thrill the crowd.'
     },
@@ -526,4 +527,10 @@ export const mutations = {
   setStory(state, val) {
     state.story = val
   },
+
+  intKey(state, val) {
+    state.interactiveKey++
+  },
+
+  
 }

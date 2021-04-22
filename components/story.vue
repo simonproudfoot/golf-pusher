@@ -10,7 +10,7 @@
             <video controls autoplay loop>
                 <source :src="require('@/assets/video/'+visible.video)" type="video/mp4">
             </video>
-            <span class="gradientOverlay" style="height:300px"></span>
+            <span class="gradientOverlay" style="height:915px"></span>
         </div>
     </transition>
     <button class="homeBtn" @click="goHome()"><svg xmlns="http://www.w3.org/2000/svg" width="41.625" height="41.625" viewBox="0 0 41.625 41.625">
@@ -67,12 +67,13 @@ export default {
             completedSteps: 6,
             totalSteps: 10,
             selected: 0,
-            // $gsap: new TimelineMax({ paused: true, reversed: true }),
         }
     },
     beforeDestroy() {
-        // this.$gsap.kill();
+
         this.$store.state.story = null
+
+        this.$store.commit('intKey')
     },
     methods: {
         goHome() {
@@ -84,38 +85,41 @@ export default {
         },
         slideChange(i) {
             if (i > this.selected) {
-                this.$gsap.to('.textBox__inner__content', { opacity: 0, x: -100, duration: 2 })
-                this.$gsap.to('.textBox__inner__content', { x: 100, duration: 2, onCompleteParams: this.selected = i })
-                this.$gsap.to('.textBox__inner__content', { x: 0, opacity: 1, duration: 2 })
+                this.$gsap.to('.textBox__inner__content', { x: -100, opacity: 0, duration: 0.5 })
+                this.$gsap.set('.textBox__inner__content', { x: 100, opacity: 0, onCompleteParams: this.selected = i })
+                this.$gsap.to('.textBox__inner__content', { x: 0, opacity: 1, duration: 0.5 })
+
             } else {
-                this.$gsap.to('.textBox__inner__content', { opacity: 0, x: 100, duration: 2 })
-                this.$gsap.to('.textBox__inner__content', { x: -100, duration: 2, onCompleteParams: this.selected = i })
-                this.$gsap.to('.textBox__inner__content', { x: 0, opacity: 1, duration: 2 })
-            }
-        },
-        slideNext() {
-            this.$gsap.to('.textBox__inner__content', {x: -100, opacity: 0, duration: 0.5 })
-            this.$gsap.set('.textBox__inner__content', {x: 100, opacity: 0,  onComplete: this.next()})
-            this.$gsap.to('.textBox__inner__content', { x: 0, opacity: 1, duration: 0.5})
-        },
-        slidePrev() {
-            this.$gsap.to('.textBox__inner__content', { duration: 0.5, opacity: 0, x: 100 })
-            this.$gsap.set('.textBox__inner__content', { opacity:0, x: -100, onComplete: this.prev })
+
+                this.$gsap.to('.textBox__inner__content', { duration: 0.5, opacity: 0, x: 100 })
+                this.$gsap.set('.textBox__inner__content', { opacity: 0, x: -100, onCompleteParams: this.selected = i })
+                
             this.$gsap.to('.textBox__inner__content', { duration: 0.5, x: 0, opacity: 1 })
-        },
-        // had to make these functions
-        next() {
-            this.selected++
-        },
-        prev() {
-            this.selected--
-        },
-        reset() {
-            this.$store.commit('setStory', '')
-            this.$store.commit('setView', 'storySelect')
         }
     },
-    watch: {
+    slideNext() {
+        this.$gsap.to('.textBox__inner__content', { x: -100, opacity: 0, duration: 0.5 })
+        this.$gsap.set('.textBox__inner__content', { x: 100, opacity: 0, onComplete: this.next() })
+        this.$gsap.to('.textBox__inner__content', { x: 0, opacity: 1, duration: 0.5 })
+    },
+    slidePrev() {
+        this.$gsap.to('.textBox__inner__content', { duration: 0.5, opacity: 0, x: 100 })
+        this.$gsap.set('.textBox__inner__content', { opacity: 0, x: -100, onComplete: this.prev() })
+        this.$gsap.to('.textBox__inner__content', { duration: 0.5, x: 0, opacity: 1 })
+    },
+    // had to make these functions
+    next() {
+        this.selected++
+    },
+    prev() {
+        this.selected--
+    },
+    reset() {
+        this.$store.commit('setStory', '')
+        this.$store.commit('setView', 'storySelect')
+    }
+},
+watch: {
         selected(val) {
             this.$store.commit('setStory', val)
         }
@@ -163,9 +167,7 @@ export default {
     },
     components: {
         RadialProgressBar
-
     }
-
 }
 </script>
 
@@ -173,6 +175,9 @@ export default {
 .story {
     position: relative;
     display: block;
+        height: 1920px !important;
+    max-height: 1920px !important;
+    float: left;
 }
 
 .showTime {
@@ -223,7 +228,7 @@ export default {
     // clip-path: polygon(0 4%, 100% 0%, 100% 100%, 0% 100%);
     clip-path: polygon(0px 56px, 100% 0, 100% 100%, 0% 100%);
     background: black;
-    height: 800px;
+    height: 100%;
     top: 0;
     margin: auto;
     width: 100%;
@@ -238,10 +243,8 @@ export default {
     }
 
     video {
-        height: auto;
-        width: 100%;
-        position: absolute;
-        bottom: 0;
+        height: 100%;
+        
     }
 }
 

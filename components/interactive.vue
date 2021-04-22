@@ -26,6 +26,7 @@
     <story class="storyContent" v-if="$store.state.view == 'storySelect' && $store.state.story !== null" :key="storyKey" />
 </section>
 </template>
+
 <script>
 export default {
     name: 'interactive',
@@ -39,12 +40,21 @@ export default {
 
     methods: {
         loadStories() {
-            this.$gsap.set(".fadeUp",  { y: 300, autoAlpha: 0 });
+            this.$gsap.set(".fadeUp", { y: 300, autoAlpha: 0 });
             this.$gsap.to(".fadeUp", 0.7, { y: 0, autoAlpha: 1, stagger: 0.2 });
         },
         openStory(storyId) {
             this.storyKey++
             this.$store.commit('setStory', storyId)
+        }
+    },
+    watch: {
+        '$store.state.interactiveKey': function () {
+            this.$gsap.set(".fadeUp", { y: 300, autoAlpha: 0 });
+            setTimeout(() => {
+                this.loadStories()
+            }, 700);
+
         }
     },
     computed: {
@@ -70,9 +80,10 @@ export default {
         storys() {
             return this.$store.getters[this.$nuxt.$route.name]
         },
+
         view: {
             get() {
-                return this.store.state.storySelect
+                return this.$store.state.storySelect
             },
             set(val) {
                 this.$store.commit('setView', val)
@@ -86,19 +97,29 @@ export default {
     }
 }
 </script>
+
 <style lang="scss">
-.interactive__inner {
-    position: relative;
-    padding-bottom: 200px !important;
-    overflow: auto;
-    margin-top: 50px;
+.interactive {
+    height: 1920px !important;
+    max-height: 1920px !important;
+
+    width: 100%;
+    display: block;
+
+    &__inner {
+        display: block;
+        height: 100%;
+
+    }
 }
+
 .storyContent {
     display: block;
     width: 100%;
     height: 100%;
     position: relative;
 }
+
 .buttonShape {
     clip-path: polygon(0 4%, 100% 0, 91% 45%, 1% 36%);
     background-color: $darkBlue;
@@ -114,10 +135,12 @@ export default {
     padding: 35px 0;
     font-size: 3rem;
     vertical-align: middle;
+
     span {
         vertical-align: sub;
         margin-right: 50px;
     }
+
     .arrow {
         border: 6px solid $green;
         height: 100px;
@@ -126,6 +149,7 @@ export default {
         display: inline-block;
         position: relative;
         vertical-align: middle;
+
         svg {
             position: absolute;
             top: 0;
@@ -133,12 +157,14 @@ export default {
             left: 0;
             right: 0;
             margin: auto;
+
             path {
                 fill: $green
             }
         }
     }
 }
+
 .card {
     position: relative;
     background-color: #000;
@@ -148,15 +174,18 @@ export default {
     margin-bottom: 50px;
     background-size: cover;
     background-repeat: no-repeat;
+
     &:last-of-type {
         margin-bottom: 200px;
     }
+
     span {
         position: absolute;
         left: 20px;
         bottom: 20px;
         max-width: 50%;
     }
+
     &__next {
         width: 100px;
         height: 89px;
@@ -165,9 +194,11 @@ export default {
         right: 0;
         background-image: url('~@/assets/img/next.svg');
         background-repeat: no-repeat;
+
         &a {
             fill: #5ec4e1;
         }
+
         &b {
             fill: #191e42
         }

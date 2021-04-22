@@ -87,11 +87,7 @@ export default {
 </script>
 
 <style lang="scss">
-
-
-.patternTop {
-
-}
+.patternTop {}
 
 .eyeofthestorm .year {
     color: $red;
@@ -116,12 +112,15 @@ export default {
 }
 
 header {
-    height: 1920px;
+    height: 1920px !important;
+    max-height: 1920px !important;
+    
     //border-bottom: 3px grey dashed;
     position: relative;
     z-index: 1;
     background-size: contain;
     background-repeat: no-repeat;
+    
 }
 
 .intro {
