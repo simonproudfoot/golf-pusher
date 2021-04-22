@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/duels", {data:[{}],fetch:{},mutations:[]});

@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/eyeofthestorm", {data:[{}],fetch:{},mutations:[]});
