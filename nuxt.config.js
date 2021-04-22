@@ -70,7 +70,6 @@ export default {
   // ADD IN ONLINB VERSION
   serverMiddleware: ["~/serverMiddleware/socket-io-server.js"],
 
-
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   }
