@@ -43,7 +43,16 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+    'nuxt-gsap-module',
   ],
+
+  gsap: {
+    extraPlugins: {
+      cssRule: true,
+  
+   
+    }
+    },
 
   // Modules: https://go.nuxtjs.dev/config-modules
 

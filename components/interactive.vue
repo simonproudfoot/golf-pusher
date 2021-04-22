@@ -1,6 +1,6 @@
 <template>
 <section class="interactive">
-
+    </h1>
     <div v-if="$store.state.view == 'main'" class="interactive__inner">
         <div class="buttonShape" @click="view = 'storySelect'"><span>Tap to start</span>
             <div class="arrow">
@@ -11,12 +11,11 @@
             </div>
         </div>
     </div>
-    <span v-if="$store.state.view == 'storySelect' && $store.state.story == null"  class="gradientOverlay" style="height: 200px"></span>
+    <span v-if="$store.state.view == 'storySelect' && $store.state.story == null" class="gradientOverlay" style="height: 200px"></span>
     <div v-if="$store.state.view == 'storySelect' && $store.state.story == null" class="interactive__inner">
         <div class="card fadeUp text-left p-8" v-for="(section, i) in storys" :key="i" @click="openStory(i)" :style="{ backgroundImage: 'url(' + require('@/assets/img/'+section.thumb+'') + ')' }">
             <span @click="openStory(i)" class="text-5xl text-white">{{section.title}}</span>
             <button class="card__next"></button>
-
             <svg class="card__next" xmlns="http://www.w3.org/2000/svg" width="103" height="90.305" viewBox="0 0 103 90.305">
                 <defs></defs>
                 <path :fill="featureColor" d="M-1806.8,1863.326l103-90.3v90.3Z" transform="translate(1806.797 -1773.021)" />
@@ -27,36 +26,24 @@
     <story class="storyContent" v-if="$store.state.view == 'storySelect' && $store.state.story !== null" :key="storyKey" />
 </section>
 </template>
-
 <script>
-
-import { TweenMax, TimelineMax, Power3, CSSPlugin } from "gsap";
-
-
-
 export default {
     name: 'interactive',
- 
     data: function () {
         return {
             storyKey: 0,
             story: 0,
-            storyIntroTl: new TimelineMax({ paused: true, reversed: true }),
+            //  storyIntroTl: new TimelineMax({ paused: true, reversed: true }),
         }
     },
-    mounted() {
-        this.storyIntroTl.play()
-    },
+
     methods: {
         loadStories() {
-            this.storyIntroTl.play()
-            // this.storyIntroTl.fromTo(".animateTitle", 0.7, { y: -100, autoAlpha: 0 }, { y: 0, autoAlpha: 1 });
-            this.storyIntroTl.staggerFrom(".fadeUp", 0.7, { y: 300, autoAlpha: 0 }, 0.2);
+            this.$gsap.set(".fadeUp",  { y: 300, autoAlpha: 0 });
+            this.$gsap.to(".fadeUp", 0.7, { y: 0, autoAlpha: 1, stagger: 0.2 });
         },
         openStory(storyId) {
             this.storyKey++
-            this.storyIntroTl.reverse();
-            //this.storyIntroTl.kill();
             this.$store.commit('setStory', storyId)
         }
     },
@@ -80,7 +67,6 @@ export default {
                 return ''
             }
         },
-
         storys() {
             return this.$store.getters[this.$nuxt.$route.name]
         },
@@ -100,24 +86,19 @@ export default {
     }
 }
 </script>
-
 <style lang="scss">
-
-
 .interactive__inner {
     position: relative;
     padding-bottom: 200px !important;
     overflow: auto;
     margin-top: 50px;
 }
-
 .storyContent {
     display: block;
     width: 100%;
     height: 100%;
     position: relative;
 }
-
 .buttonShape {
     clip-path: polygon(0 4%, 100% 0, 91% 45%, 1% 36%);
     background-color: $darkBlue;
@@ -133,12 +114,10 @@ export default {
     padding: 35px 0;
     font-size: 3rem;
     vertical-align: middle;
-
     span {
         vertical-align: sub;
         margin-right: 50px;
     }
-
     .arrow {
         border: 6px solid $green;
         height: 100px;
@@ -147,7 +126,6 @@ export default {
         display: inline-block;
         position: relative;
         vertical-align: middle;
-
         svg {
             position: absolute;
             top: 0;
@@ -155,14 +133,12 @@ export default {
             left: 0;
             right: 0;
             margin: auto;
-
             path {
                 fill: $green
             }
         }
     }
 }
-
 .card {
     position: relative;
     background-color: #000;
@@ -172,17 +148,15 @@ export default {
     margin-bottom: 50px;
     background-size: cover;
     background-repeat: no-repeat;
-    &:last-of-type{
+    &:last-of-type {
         margin-bottom: 200px;
     }
-
     span {
         position: absolute;
         left: 20px;
         bottom: 20px;
         max-width: 50%;
     }
-
     &__next {
         width: 100px;
         height: 89px;
@@ -191,15 +165,12 @@ export default {
         right: 0;
         background-image: url('~@/assets/img/next.svg');
         background-repeat: no-repeat;
-
         &a {
             fill: #5ec4e1;
         }
-
         &b {
             fill: #191e42
         }
     }
-
 }
 </style>

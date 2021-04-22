@@ -1,19 +1,18 @@
 <template>
 <div class="slider">
-    <img v-for="(image, i) in images" :key="i" class="backImage" :ref="image"  :src="require(`../assets/img/${image}`)">
+
+    <img v-for="(image, i) in images" :key="i" class="backImage" :ref="image" :src="require(`../assets/img/${image}`)">
+
+</div>
 </div>
 </template>
 
 <script>
-
-import { TweenMax, TimelineMax, Power3, CSSPlugin } from "gsap";
-
 export default {
     name: 'slider',
     props: ['images'],
     data: function () {
         return {
-            slideTimeline: new TimelineMax({ paused: true, reversed: true, repeat: -1 }),
             activeImage: '',
             speed: 25,
             duration: 10,
@@ -23,27 +22,23 @@ export default {
     methods: {
         runSlide() {
             this.images.forEach(element => {
-               this.slideTimeline.fromTo(this.$refs[element], { autoAlpha: 0, scale: 1.1 }, { autoAlpha: 1, scale: 1, duration: 10 })
+                this.$gsap.fromTo(this.$refs[element], { opacity: 0, scale: 1.1 }, { opacity: 1, scale: 1, duration: 10, repeat: -1 })
             });
         }
     },
     mounted() {
-        this.slideTimeline.play()
         this.runSlide()
-
     }
 }
 </script>
 
 <style lang="scss">
-
-
 .slider {
     overflow: hidden;
     position: absolute;
     height: 100%;
     width: 100%;
-    top: 460px;
+    top: 400px;
     background-color: $darkBlue;
     z-index: 0;
 

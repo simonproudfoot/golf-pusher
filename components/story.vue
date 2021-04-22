@@ -60,7 +60,6 @@
 </template>
 
 <script>
-import { TweenMax, TimelineMax, Power3, CSSPlugin } from "gsap";
 import RadialProgressBar from 'vue-radial-progress'
 export default {
     data: function () {
@@ -68,41 +67,41 @@ export default {
             completedSteps: 6,
             totalSteps: 10,
             selected: 0,
-            storySlideTl: new TimelineMax({ paused: true, reversed: true }),
+            // $gsap: new TimelineMax({ paused: true, reversed: true }),
         }
     },
     beforeDestroy() {
-        this.storySlideTl.kill();
+        // this.$gsap.kill();
         this.$store.state.story = null
     },
     methods: {
         goHome() {
-            this.storySlideTl.to('.homeBtn', 0.5, { autoAlpha: 0 })
-            this.storySlideTl.staggerTo('.homeBtn, .textBox__inner__content, .textBox, .video, .showTime', 0.5, { autoAlpha: 0, y: 100, onComplete: () => this.reset }, "+=0.2").then(() => {
+            this.$gsap.to('.homeBtn', 0.5, { opacity: 0 })
+            this.$gsap.to('.homeBtn, .textBox__inner__content, .textBox, .video, .showTime', 0.5, { opacity: 0, y: 100, stagger: 0.3, onComplete: () => this.reset }, "+=0.2").then(() => {
                 this.$store.commit('setStory', null)
                 //this.$store.commit('setView', 'storySelect')
             })
         },
         slideChange(i) {
             if (i > this.selected) {
-                this.storySlideTl.to('.textBox__inner__content', 0.5, { autoAlpha: 0, x: -100 })
-                this.storySlideTl.to('.textBox__inner__content', 0.1, { x: 100, onCompleteParams: this.selected = i })
-                this.storySlideTl.to('.textBox__inner__content', 0.5, { x: 0, autoAlpha: 1 })
+                this.$gsap.to('.textBox__inner__content', { opacity: 0, x: -100, duration: 2 })
+                this.$gsap.to('.textBox__inner__content', { x: 100, duration: 2, onCompleteParams: this.selected = i })
+                this.$gsap.to('.textBox__inner__content', { x: 0, opacity: 1, duration: 2 })
             } else {
-                this.storySlideTl.to('.textBox__inner__content', 0.5, { autoAlpha: 0, x: 100 })
-                this.storySlideTl.to('.textBox__inner__content', 0.1, { x: -100, onCompleteParams: this.selected = i })
-                this.storySlideTl.to('.textBox__inner__content', 0.5, { x: 0, autoAlpha: 1 })
+                this.$gsap.to('.textBox__inner__content', { opacity: 0, x: 100, duration: 2 })
+                this.$gsap.to('.textBox__inner__content', { x: -100, duration: 2, onCompleteParams: this.selected = i })
+                this.$gsap.to('.textBox__inner__content', { x: 0, opacity: 1, duration: 2 })
             }
         },
         slideNext() {
-            this.storySlideTl.to('.textBox__inner__content', 0.5, { autoAlpha: 0, x: -100 })
-            this.storySlideTl.to('.textBox__inner__content', 0.1, { x: 100, onComplete: this.next })
-            this.storySlideTl.to('.textBox__inner__content', 0.5, { x: 0, autoAlpha: 1 })
+            this.$gsap.to('.textBox__inner__content', {x: -100, opacity: 0, duration: 0.5 })
+            this.$gsap.set('.textBox__inner__content', {x: 100, opacity: 0,  onComplete: this.next()})
+            this.$gsap.to('.textBox__inner__content', { x: 0, opacity: 1, duration: 0.5})
         },
         slidePrev() {
-            this.storySlideTl.to('.textBox__inner__content', 0.5, { autoAlpha: 0, x: 100 })
-            this.storySlideTl.to('.textBox__inner__content', 0.1, { x: -100, onComplete: this.prev })
-            this.storySlideTl.to('.textBox__inner__content', 0.5, { x: 0, autoAlpha: 1 })
+            this.$gsap.to('.textBox__inner__content', { duration: 0.5, opacity: 0, x: 100 })
+            this.$gsap.set('.textBox__inner__content', { opacity:0, x: -100, onComplete: this.prev })
+            this.$gsap.to('.textBox__inner__content', { duration: 0.5, x: 0, opacity: 1 })
         },
         // had to make these functions
         next() {
@@ -123,15 +122,16 @@ export default {
     },
     mounted() {
         this.selected = this.$store.state.story
-        this.storySlideTl.set('.showTime', { autoAlpha: 0, x: -60 });
-        this.storySlideTl.play();
-        this.storySlideTl.staggerFromTo('.homeBtn, .textBox__inner__content, .textBox, .video', 0.5, { autoAlpha: 0, y: 100 }, { autoAlpha: 1, y: 0 }, "+=0.2")
-        this.storySlideTl.to('.homeBtn', 0.5, { autoAlpha: 1 })
+        this.$gsap.set('.showTime', { opacity: 0, x: -60 });
+        this.$gsap.set('.showTime', { opacity: 0, x: 100 });
+
+        this.$gsap.to('.homeBtn, .textBox__inner__content, .textBox, .video', 0.5, { opacity: 1, y: 0 })
+        this.$gsap.to('.homeBtn', 0.5, { opacity: 1 })
         setTimeout(() => {
-            this.storySlideTl.to('.showTime', { autoAlpha: 1, x: 0 });
+            this.$gsap.to('.showTime', { opacity: 1, x: 0 });
         }, 5000)
         setTimeout(() => {
-            this.storySlideTl.to('.showTime', { autoAlpha: 0, x: -16 });
+            this.$gsap.to('.showTime', { opacity: 0, x: -16 });
         }, 60000)
     },
     computed: {
@@ -161,17 +161,15 @@ export default {
             return this.$store.getters[this.$nuxt.$route.name][this.selected]
         }
     },
-    components:{
+    components: {
         RadialProgressBar
 
     }
-   
+
 }
 </script>
 
 <style lang="scss" scoped>
-
-
 .story {
     position: relative;
     display: block;
