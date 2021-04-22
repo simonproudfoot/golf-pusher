@@ -4,9 +4,7 @@
     <Nuxt />
   </div>
 </template>
-
-
-
+s
  <!--
  LOCAL NETWORK
   <script>
