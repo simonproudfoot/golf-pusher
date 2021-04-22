@@ -1,0 +1,66 @@
+#app {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    font-family: "Radikal";
+    font-weight: normal;
+    width: 1080px;
+    height: 5760px;
+    margin: auto;
+    position: relative;
+    background-color: $darkBlue;
+    overflow: hidden;
+    font-size: 25px;
+}
+
+/* Enter and leave animations can use different */
+/* durations and timing functions.              */
+.fade-out-enter-active {
+    transition: all 1s ease;
+}
+.fade-out-leave-active {
+    transition: all 1s ease;
+}
+.fade-out-enter,
+.fade-out-leave-to {
+    opacity: 0;
+
+}
+
+.fadeY-enter-active {
+    transition: all 1s ease;
+
+}
+.fadeY-leave-active {
+    transition: all 0.3s ease;
+}
+.fadeY-enter,
+.fadeY-leave-to {
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+.interactive {
+    display: block;
+    height: 1920px;
+
+    position: relative;
+    z-index: 1;
+
+
+    &__inner {
+        height: 100%;
+        padding: 50px;
+        overflow-y: auto;
+    }
+}
+
+.gradientOverlay {
+    background: rgb(25, 30, 66);
+    background: linear-gradient(180deg, rgba(25, 30, 66, 0) 0%, rgba(25, 30, 66, 1) 100%);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9;
+}
