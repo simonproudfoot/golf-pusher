@@ -37,17 +37,23 @@ const pusher = new Pusher({
     useTLS: true
 });
 
-var i = 0;
+
+
+var s = 0;
+var m = 20;
 setInterval(() => {
-    i++;
-
-    pusher.trigger("my-channel", "my-event", {
-        message: "tick"
-    });
-
+    s++;
+    if (s === 60) {
+        m--
+        s = 0;
+        pusher.trigger("my-channel", "my-event", {
+            minutes: m
+        });
+    }
+    if (m === 0) {
+        m = 20;
+    }
 }, 1000);
-
-
 
 
 

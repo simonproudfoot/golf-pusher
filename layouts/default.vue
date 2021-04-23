@@ -1,10 +1,9 @@
 <template>
   <div id="app">
-    <h1 class="text-white testTimer">{{tick}}</h1>
+    <h1 class="text-white testTimer">{{$store.state.time}} minutes until next show</h1>
     <Nuxt />
   </div>
 </template>
-s
  <!--
  LOCAL NETWORK
   <script>
@@ -36,28 +35,20 @@ s
 //     },
 // }
 // </script> -->
-
-
 <script>
 // PUSHER VERSION
 var Pusher = require('pusher-js');
-Pusher.logToConsole = true;
+//Pusher.logToConsole = true;
 var pusher = new Pusher('f01ccdabee9849cb6558', {
     cluster: 'eu'
 });
 var channel = pusher.subscribe('my-channel');
 export default {
-    data: function () {
-        return {
-            tick: 0,
-        }
-    },
-    created() {
 
+    created() {
         channel.bind('my-event', (data) => {
-     
-          this.tick++
-        
+          this.$store.commit('setTime', data.minutes)
+          console.log(data)
         });
     },
     computed: {
@@ -71,8 +62,9 @@ export default {
   bottom: 0;
   left: 0;
   height: 40px;
-  width: 100px;
+  width: 300px;
   z-index: 9999;
   background: $darkBlue;
+  font-size: 10px;
 }
 </style>

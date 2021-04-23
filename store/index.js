@@ -1,7 +1,7 @@
 
 export const strict = false
 export const state = () => ({
-
+    time: 20,
     screenMode: '',
     view: 'main',
     story: null,
@@ -527,10 +527,11 @@ export const mutations = {
   setStory(state, val) {
     state.story = val
   },
-
   intKey(state, val) {
     state.interactiveKey++
   },
-
+  setTime(state, val){
+    state.time = val
+  }
   
 }

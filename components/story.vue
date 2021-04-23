@@ -25,8 +25,8 @@
             <p><small>Show duration 5 mins</small></p>
         </div>
         <div class="showTime__count">
-            <radialProgressBar :diameter="120" :completed-steps="completedSteps" :total-steps="totalSteps" :startColor="'#EBE717'" :stopColor="'#EBE717'" :strokeColor="'#5C5C5C'" :innerStrokeColor="'#2d3152'" :innerStrokeWidth="10" :strokeWidth="10">
-                <h1 style="color:#EBE717; font-size: 35px">{{ completedSteps }}</h1>
+            <radialProgressBar :diameter="120" :completed-steps="$store.state.time" :total-steps="20" :startColor="'#EBE717'" :stopColor="'#EBE717'" :strokeColor="'#5C5C5C'" :innerStrokeColor="'#2d3152'" :innerStrokeWidth="10" :strokeWidth="10">
+                <h1 style="color:#EBE717; font-size: 35px">{{ $store.state.time }}</h1>
             </radialProgressBar>
         </div>
     </div>
@@ -127,7 +127,7 @@ watch: {
     mounted() {
         this.selected = this.$store.state.story
         this.$gsap.set('.showTime', { opacity: 0, x: -60 });
-        this.$gsap.set('.showTime', { opacity: 0, x: 100 });
+
 
         this.$gsap.to('.homeBtn, .textBox__inner__content, .textBox, .video', 0.5, { opacity: 1, y: 0 })
         this.$gsap.to('.homeBtn', 0.5, { opacity: 1 })
@@ -285,7 +285,7 @@ watch: {
                 position: relative;
                 display: inline-block;
                 height: 38px;
-                width: 35px;
+             
                 margin-right: 15px;
 
                 svg {
