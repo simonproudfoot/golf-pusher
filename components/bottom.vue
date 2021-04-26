@@ -40,19 +40,19 @@ export default {
     computed: {
         featureColor() {
             if ($nuxt.$route.name === 'iwasthere' || $nuxt.$route.name === 'makinghistory') {
-                return '#77cae7';
+                return '#27385b';
             }
             if ($nuxt.$route.name === 'followtheonegreen' || $nuxt.$route.name === 'againstallodds') {
-                return '#6dd6c4';
+                return '#233c55';
             }
             if ($nuxt.$route.name === 'eyeofthestorm') {
-                return '#eb6742';
+                return '#382842';
             }
             if ($nuxt.$route.name === 'followtheoneyellow') {
-                return '#ebe64f';
+                return '#393c44';
             }
             if ($nuxt.$route.name === 'duels') {
-                return '#8282c9';
+                return '#282d56';
             } else {
                 return ''
             }
@@ -69,7 +69,7 @@ export default {
 }
 
 .st2 {
-    opacity: 0.15;
+   
     enable-background: new;
 }
 

@@ -127,8 +127,6 @@ watch: {
     mounted() {
         this.selected = this.$store.state.story
         this.$gsap.set('.showTime', { opacity: 0, x: -60 });
-
-
         this.$gsap.to('.homeBtn, .textBox__inner__content, .textBox, .video', 0.5, { opacity: 1, y: 0 })
         this.$gsap.to('.homeBtn', 0.5, { opacity: 1 })
         setTimeout(() => {
@@ -243,6 +241,7 @@ watch: {
     }
 
     video {
+        pointer-events: none;
         height: 100%;
         
     }
