@@ -1,12 +1,16 @@
 <template>
-<header :class="$store.state.view !== 'main' ? 'patternTop' : null" :style="$store.state.view !== 'main' ?  { backgroundImage: 'url(' + require('@/assets/img/'+headPattern+'.svg') + ')'} : null">
-    <div class="intro" :style="'backgroundColor:'+featureColor">
+<!-- <header :class="$store.state.view !== 'main' ? 'patternTop' : null" :style="$store.state.view !== 'main' ?  { backgroundImage: 'url(' + require('@/assets/img/'+headPattern+'.svg') + ')'} : null"> -->
+<header>
+    <svg v-show="$store.state.view !== 'main'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280.11 1859.72" style="width: 1287px; opacity: 0.1">
+        <path id="headPath" stroke-linecap="butt" fill="none" stroke-linejoin="miter" :stroke="primaryColour" stroke-width="50" stroke-miterlimit="10" class="st0" d="M792,1056.8l-228.9,351.46L.54,1127.75,112,212.12,595.53,631.84m-339,623.57L950,718.93M715.84,542.46l564,413.41m-215.73,246.8L812.56,1486m-168.9-201.36,387.39,473.86,47.12-562.67L330.53,830.43m655-486.83L473.94.89,437.87,495M8.29,1064.12,1196.6,188" />
+    </svg>
+    <div class="intro" :style="'backgroundColor:'+primaryColour">
         <h1 v-if="titleA" class="text-9xl">{{titleA}}</h1>
         <h1 class="text-9xl font-bold">{{titleB}}</h1>
     </div>
     <div class="sectionTitle">
         <transition name="fadeY">
-            <h1 v-show="$store.state.story == null && $store.state.view == 'storySelect'" class="text-9xl font-normal animateTitle">Select a story to explore</h1>
+            <h1 v-if="$store.state.story == null && $store.state.view == 'storySelect'" class="text-9xl font-normal animateTitle">Select a story to explore</h1>
         </transition>
         <transition name="fadeY" mode="out-in">
             <div :class="routeName" v-if="$store.state.story !== null" v-html="story.heading" :key="tKey" class="font-normal animateTitle">
@@ -15,70 +19,49 @@
     </div>
 </header>
 </template>
-
 <script>
 export default {
     name: 'heading',
-    props: ['titleA', 'titleB'],
+    props: ['titleA', 'titleB', 'primaryColour'],
     data: function () {
         return {
             tKey: 0,
         }
+    },
+    methods: {
+        headerLines(dir) {
+            var headPath = document.querySelector('#headPath');
+            var l = headPath.getTotalLength();
+            if (dir === 'reverse') {
+                this.$gsap.to(headPath, { strokeDashoffset: l, duration: 1 });
+            } else {
+                this.$gsap.fromTo(headPath, { strokeDashoffset: l }, { strokeDashoffset: 0, duration: 7, ease: 'power2.inOut' });
+            }
+        }
+    },
+    mounted() {
+        var headPath = document.querySelector('#headPath');
+        var l = headPath.getTotalLength();
+        this.$gsap.set(headPath, { strokeDasharray: l });
+        
+
     },
     computed: {
         story() {
             return this.$store.getters[this.$nuxt.$route.name][this.$store.state.story]
         },
 
-        headPattern() {
-            if (this.$store.state.view !== 'main') {
-                if (this.$nuxt.$route.name === 'iwasthere' || this.$nuxt.$route.name === 'makinghistory') {
-                    return 'pattern-Top-blue';
-                }
-                if (this.$nuxt.$route.name === 'followtheonegreen' || this.$nuxt.$route.name === 'againstallodds') {
-                    return 'pattern-Top-aqua';
-                }
-                if (this.$nuxt.$route.name === 'eyeofthestorm') {
-                    return 'pattern-Top-red';
-                }
-                if (this.$nuxt.$route.name === 'followtheoneyellow') {
-                    return 'pattern-Top-yellow';
-                }
-                if (this.$nuxt.$route.name === 'duels') {
-                    return 'pattern-Top-purple';
-                } else {
-                    return null
-                }
-            } else {
-                return null
-            }
-        },
-
         routeName() {
             return this.$nuxt.$route.name
         },
-
-        featureColor() {
-            if (this.$nuxt.$route.name === 'iwasthere' || this.$nuxt.$route.name === 'makinghistory') {
-                return '#77cae7';
-            }
-            if (this.$nuxt.$route.name === 'followtheonegreen' || this.$nuxt.$route.name === 'againstallodds') {
-                return '#6dd6c4';
-            }
-            if (this.$nuxt.$route.name === 'eyeofthestorm') {
-                return '#eb6742';
-            }
-            if (this.$nuxt.$route.name === 'followtheoneyellow') {
-                return '#ebe64f';
-            }
-            if (this.$nuxt.$route.name === 'duels') {
-                return '#8282c9';
-            } else {
-                return ''
-            }
-        }
     },
     watch: {
+        '$store.state.resetKey'() {
+            this.headerLines('reverse')
+        },
+        '$store.state.view'(val) {
+            val !== 'main' ? this.headerLines() : null
+        },
         '$store.state.story'() {
             this.tKey++
         }
@@ -87,6 +70,10 @@ export default {
 </script>
 
 <style lang="scss">
+#pat {
+    margin-top: 800px;
+}
+
 .patternTop {}
 
 .eyeofthestorm .year {
@@ -114,13 +101,13 @@ export default {
 header {
     height: 1920px !important;
     max-height: 1920px !important;
-    
+
     //border-bottom: 3px grey dashed;
     position: relative;
     z-index: 1;
     background-size: contain;
     background-repeat: no-repeat;
-    
+
 }
 
 .intro {

@@ -49,7 +49,7 @@ export default {
   gsap: {
     extraPlugins: {
       cssRule: true,
-  
+      motionPath: true,
    
     }
     },
@@ -63,20 +63,25 @@ export default {
     
   ],
   // ADD IN LOCAL VERSION
-  // io: {
-  //   // module options  
-  //   sockets: [{
-  //     name: 'main',
-  //     url: 'http://192.168.1.233:3001'
-  //   }]
-  // },
+  io: {
+    // module options  
+    sockets: [{
+      name: 'main',
+      url: 'http://192.168.1.233:3001'
+    }]
+  },
 
+
+  env: {
+    version: 'local'
+  },
   styleResources: {
     scss: ['./assets/scss/*.scss']
   },
 
-  // ADD IN ONLINB VERSION
-  serverMiddleware: ["~/serverMiddleware/socket-io-server.js"],
+
+  serverMiddleware: ["~/serverMiddleware/socket-io-server.js"],    // ADD IN ONLINE VERSION
+  //serverMiddleware: ["~/serverMiddleware/pusher-server.js"],   // ADD IN LOCAL NETWORK VERSION
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

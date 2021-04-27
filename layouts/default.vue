@@ -1,12 +1,11 @@
 <template>
-  <div id="app">
-    <h1 class="text-white testTimer">{{$store.state.time}} minutes until next show</h1>
+<div id="app">
+    <h1 class="text-white testTimer" @click="reset()">{{$store.state.time}} minutes until next show</h1>
     <Nuxt />
-  </div>
+</div>
 </template>
- <!--
- LOCAL NETWORK
-  <script>
+
+<script>
 // export default {
 //     data: () => ({
 //         socket: null,
@@ -34,37 +33,64 @@
 //             })
 //     },
 // }
-// </script> -->
+// 
+</script>
 <script>
-// PUSHER VERSION
-var Pusher = require('pusher-js');
-//Pusher.logToConsole = true;
-var pusher = new Pusher('f01ccdabee9849cb6558', {
-    cluster: 'eu'
-});
-var channel = pusher.subscribe('my-channel');
-export default {
+// PUSHER online VERSION
 
+if (process.env.version !== 'local') {
+    var Pusher = require('pusher-js');
+    var pusher = new Pusher('f01ccdabee9849cb6558', {
+        cluster: 'eu'
+    });
+    var channel = pusher.subscribe('my-channel');
+}
+export default {
+    data: () => ({
+        socket: null,
+        tick: 0,
+        view: '',
+    }),
+    methods: {
+        reset() {
+          
+             this.$store.commit('resetAll')
+           // this.$store.commit('setStory', '')
+        },
+    },
     created() {
-        channel.bind('my-event', (data) => {
-          this.$store.commit('setTime', data.minutes)
-          console.log(data)
-        });
+        if (process.env.version !== 'local') {
+            console.log('Running pusher version')
+            channel.bind('my-event', (data) => {
+                this.$store.commit('setTime', data.minutes)
+                console.log(data)
+            });
+        } else {
+            console.log('Running socket version')
+            this.socket = this.$nuxtSocket({
+                channel: '/'
+            })
+            /* Listen for events: */
+            this.socket.on('message', (data) => {
+                this.$store.commit('setTime', data.minutes)
+            })
+        }
     },
     computed: {
         routes() { return this.$router.getRoutes() }
     }
 }
 </script>
+
 <style lang="scss">
-.testTimer{
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  height: 40px;
-  width: 300px;
-  z-index: 9999;
-  background: $darkBlue;
-  font-size: 10px;
+.testTimer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 40px;
+    width: 300px;
+    z-index: 9999;
+    background: $darkBlue;
+    font-size: 10px;
 }
 </style>

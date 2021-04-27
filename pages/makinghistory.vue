@@ -5,6 +5,6 @@
         <slider v-if="$store.state.view == 'main'" :images="['large.jpg', 'large2.jpg']" />
     </transition>
     <interactive />
-       <bottom/>
+    <bottom />
 </div>
 </template>
