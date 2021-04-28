@@ -41,6 +41,7 @@ export default {
         loadStories() {
             this.$gsap.set(".fadeUp", { y: 100, autoAlpha: 0 });
             this.$gsap.to(".fadeUp", 0.7, { y: 0, autoAlpha: 1, stagger: 0.2 });
+            this.$gsap.from(".gradientOverlay", { y: 0, autoAlpha: 0, delay: 0.5 });
         },
         openStory(storyId) {
             this.storyKey++

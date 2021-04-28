@@ -11,7 +11,6 @@
     <div class="sectionTitle">
         <transition name="fadeY" mode="out-in">
             <h1 v-if="$store.state.story == null && $store.state.view == 'storySelect'" class="text-9xl font-normal animateTitle">Select a story to explore</h1>
-
             <div :class="routeName" v-if="$store.state.story !== null" v-html="story.heading" :key="tKey" class="font-normal animateTitle">
             </div>
         </transition>
@@ -36,7 +35,6 @@ export default {
                 this.$gsap.to(headPath, { strokeDashoffset: l, duration: 1 });
                 this.$gsap.to(headPath, { strokeDashoffset: l, autoAlpha: 0, duration: 0.5, delay: 0.8 });
             } else {
-
                 this.$gsap.fromTo(headPath, { strokeDashoffset: l }, { strokeDashoffset: 0, duration: 7, ease: 'power2.inOut' });
                 this.$gsap.fromTo(headPath, { autoAlpha: 0 }, { autoAlpha: 1, duration: 1, delay: 0.7, ease: 'power2.inOut' });
             }

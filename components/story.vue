@@ -6,7 +6,7 @@
     </div>
 
     <div v-if="visible.video" class="video" :key="selected">
-        <video controls autoplay loop>
+        <video  autoplay loop>
             <source :src="require('@/assets/video/'+visible.video)" type="video/mp4">
         </video>
         <span class="gradientOverlay" style="height:915px"></span>
@@ -129,7 +129,7 @@ export default {
         '$store.state.time'() {
             this.$gsap.to('.showTime', { opacity: 1, x: 0 });
             setTimeout(() => {
-                this.$gsap.to('.showTime', { opacity: 0, x: -16 });
+                this.$gsap.to('.showTime', { opacity: 0, x: -300 });
             }, 6000)
 
         },

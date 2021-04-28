@@ -3,7 +3,7 @@ export const strict = false
 export const state = () => ({
   resetKey: 0,
   time: 20,
-  screenMode: '',
+  videoMode: false,
   view: 'main',
   story: null,
   interactiveKey: 0,
@@ -511,22 +511,26 @@ export const getters = {
   eyeofthestorm(state) {
     return state.eyeOfTheStorm
   },
-  screenMode(state) {
-    return state.screenMode
+  videoMode(state) {
+    return state.videoMode
   },
 }
 
 export const mutations = {
+
+
+
   resetAll(state) {
     state.resetKey++
     setTimeout(() => {
       state.view = 'main'
       state.story = null
+    
     }, 1000);
 
   },
-  setScreenMode(state, val) {
-    state.screenMode = val
+  setVideoMode(state, val) {
+    state.videoMode = val
   },
   setView(state, val) {
     state.view = val
