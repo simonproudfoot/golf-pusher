@@ -2,7 +2,7 @@
 <section class="interactive">
     <div v-if="$store.state.view == 'main'" class="interactive__inner">
 
-        <div class="buttonShape" @click="view = 'storySelect'"><span>Tap to start</span>
+        <div class="buttonShape" v-gsap.from="{y: 50 ,duration: 1, autoAlpha: 0}" @click="view = 'storySelect'"><span>Tap to start</span>
             <div class="arrow">
                 <svg xmlns="http://www.w3.org/2000/svg" width="39.903" height="30.505" viewBox="0 0 39.903 30.505">
                     <defs></defs>
@@ -26,6 +26,7 @@
     <story class="storyContent" v-if="$store.state.view == 'storySelect' && $store.state.story !== null" :key="storyKey" :primaryColour="primaryColour" />
 </section>
 </template>
+
 <script>
 export default {
     name: 'interactive',

@@ -489,9 +489,7 @@ export const state = () => ({
 })
 
 export const getters = {
-  test() {
-    return 'hello'
-  },
+
   againstallodds(state) {
     return state.againstAllOdds
   },
