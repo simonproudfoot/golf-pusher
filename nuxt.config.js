@@ -19,21 +19,21 @@ export default {
   },
 
   server: {
-
     host: '0',
   },   // other configs 
 
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-      '~/assets/scss/colors.scss',
-      '~/assets/scss/type.scss',
-      '~/assets/scss/main.scss'
-  
+    '~/assets/scss/colors.scss',
+    '~/assets/scss/type.scss',
+    '~/assets/scss/main.scss'
+
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    { src: '~/plugins/vidle.js' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -49,10 +49,10 @@ export default {
   gsap: {
     extraPlugins: {
       cssRule: true,
-      motionPath: true,
-   
+
+
     }
-    },
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
 
@@ -60,7 +60,7 @@ export default {
     'nuxt-socket-io',
     '@nuxtjs/axios',
     '@nuxtjs/style-resources',
-    
+
   ],
   // ADD IN LOCAL VERSION
   io: {

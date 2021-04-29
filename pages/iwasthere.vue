@@ -1,5 +1,6 @@
 <template>
 <div class="home">
+    
     <main class="videoMode" v-if="$store.getters.videoMode">
         <video @ended="reset()" v-gsap.fromTo="[{autoAlpha: 0}, {autoAlpha: 1, delay: 1, duration: 1}]" class="video"  autoplay>
             <source :src="require('@/assets/video/'+videoUrl)" type="video/mp4">
@@ -16,7 +17,6 @@
         <interactive :primaryColour="pColor" />
         <bottom :primaryColour="pColor" />
     </main>
-
 </div>
 </template>
 
@@ -88,7 +88,7 @@ export default {
     position: fixed;
     bottom: 0;
     right: 0;
-    height: 20px;
+    height: 40px;
     width: 100px;
     z-index: 9999;
     background: $darkBlue;
