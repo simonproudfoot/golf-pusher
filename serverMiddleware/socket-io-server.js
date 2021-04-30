@@ -7,32 +7,30 @@ const io = require("socket.io")(3001, {
     }
 });
 
+var m = 2;
 
-// emit
-var s = 0; // how long do we wait to show the movie
-var m = 20;
 
-var countdown = () => {
-    s++;
-    if (s === 60) {
-        m--
-        s = 0;
-        //console.log(m + ' Minutes to go')
+function countdown() {
+    var current = m--
+   // if (m >= 0) {
+        console.log(`Min: ${current}!`);
         io.emit("oneSecond", {
-            minutes: m
+            minutes: current
         });
-    }
+   
 }
 
 
 io.on('connection', (socket) => {
-    setInterval(countdown, 1000)
+    console.log('Counting down')
+    
+    setInterval(countdown, 60000)
+
     // receive/reset when video finished
     socket.on('resetTimer', (msg, active) => {
+        console.log('Received reset')
         clearInterval(countdown)
-        s = 0;
-        m = 20;
-
+        m = 2;
         io.emit("oneSecond", {
             minutes: m
         });

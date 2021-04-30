@@ -1,8 +1,7 @@
 <template>
 <div class="slider">
-
+  
     <img v-for="(image, i) in images" :key="i" class="backImage" :ref="image" :src="require(`../assets/img/${image}`)">
-
 </div>
 </div>
 </template>

@@ -1,7 +1,6 @@
 <template>
 <section class="interactive">
     <div v-if="$store.state.view == 'main'" class="interactive__inner">
-
         <div class="buttonShape" v-gsap.from="{y: 50 ,duration: 1, autoAlpha: 0}" @click="view = 'storySelect'"><span>Tap to start</span>
             <div class="arrow">
                 <svg xmlns="http://www.w3.org/2000/svg" width="39.903" height="30.505" viewBox="0 0 39.903 30.505">
@@ -11,7 +10,7 @@
             </div>
         </div>
     </div>
-    <span v-if="$store.state.view == 'storySelect' && $store.state.story == null" class="gradientOverlay" style="height: 200px"></span>
+    <span v-if="$store.state.view == 'storySelect' && $store.state.story == null" class="gradientOverlay" style="height: 200px; bottom: 100px"></span>
     <div v-if="$store.state.view == 'storySelect' && $store.state.story == null" class="interactive__inner">
         <div class="card fadeUp text-left p-8" v-for="(section, i) in storys" :key="i" @click="openStory(i)" :style="{ backgroundImage: 'url(' + require('@/assets/img/'+section.thumb+'') + ')' }">
             <span @click="openStory(i)" class="text-5xl text-white">{{section.title}}</span>
@@ -82,14 +81,22 @@ export default {
 
 <style lang="scss">
 .interactive {
+    display: block;
+
     height: 1920px !important;
     max-height: 1920px !important;
     width: 100%;
     display: block;
+    position: relative;
+    z-index: 1;
 
     &__inner {
-        display: block;
+        margin-top: 100px;
         height: 100%;
+        padding: 0 100px;
+        display: block;
+        height: calc(100% - 200px);
+        overflow-y: auto;
     }
 }
 
@@ -150,8 +157,8 @@ export default {
     background-color: #000;
     display: block;
     width: 100%;
-    height: 300px;
-    margin-bottom: 50px;
+    height: 320px;
+    margin-bottom: 40px;
     background-size: cover;
     background-repeat: no-repeat;
 

@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
 
-
+  ssr: true, 
 
   head: {
     title: 'golf-nuxt',
@@ -49,8 +49,6 @@ export default {
   gsap: {
     extraPlugins: {
       cssRule: true,
-
-
     }
   },
 
@@ -73,15 +71,16 @@ export default {
 
 
   env: {
-    version: 'local'
+    version: 'online' // Also set this in server.js
+    // online / pusher 
   },
   styleResources: {
     scss: ['./assets/scss/*.scss']
   },
 
 
-  serverMiddleware: ["~/serverMiddleware/socket-io-server.js"],    // ADD IN ONLINE VERSION
-  //serverMiddleware: ["~/serverMiddleware/pusher-server.js"],   // ADD IN LOCAL NETWORK VERSION
+  //serverMiddleware: ["~/serverMiddleware/socket-io-server.js"],    // ADD IN ONLINE VERSION
+  serverMiddleware: ["~/serverMiddleware/server.js"],   // ADD IN LOCAL NETWORK VERSION
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

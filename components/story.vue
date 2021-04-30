@@ -6,7 +6,7 @@
     </div>
 
     <div v-if="visible.video" class="video" :key="selected">
-        <video  autoplay loop>
+        <video autoplay loop>
             <source :src="require('@/assets/video/'+visible.video)" type="video/mp4">
         </video>
         <span class="gradientOverlay" style="height:915px"></span>
@@ -268,7 +268,7 @@ export default {
 
         &__inner {
             color: #fff;
-            padding: 100px;
+            padding: 140px 160px;
         }
 
         &__navigation {
@@ -277,7 +277,11 @@ export default {
             bottom: 82px;
             height: 32px;
             width: 100%;
-            padding: 0 100px;
+            padding: 0 160px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          
 
             &__nav {
 
@@ -287,10 +291,10 @@ export default {
                 display: inline-block;
                 height: 38px;
 
-                margin-right: 15px;
+           
 
                 svg {
-                    margin-bottom: 3px;
+                  
                     height: 30px;
 
                 }
@@ -308,9 +312,8 @@ export default {
                 display: inline-block;
                 width: 18px;
                 height: 18px;
-                border-radius: 15px;
-                border: 3px $grey solid;
-                margin-right: 15px;
+                border-radius: 100%;
+                border: 3px #fff solid;
 
                 &--active {
                     background-color: $lightBlue;

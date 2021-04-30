@@ -40,20 +40,11 @@
     transform: translateY(50px);
 }
 
-.interactive {
-    display: block;
-    height: 1920px;
-
-    position: relative;
-    z-index: 1;
-
-
-    &__inner {
-        height: 100%;
-        padding: 50px;
-        overflow-y: auto;
-    }
+.year{
+    font-size: 4.5rem !important;
 }
+
+
 
 .gradientOverlay {
     background: rgb(25, 30, 66);
@@ -63,4 +54,36 @@
     left: 0;
     width: 100%;
     z-index: 9;
+}
+
+
+.jump {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    height: 40px;
+    width: 100px;
+    z-index: 9999;
+    background: $darkBlue;
+    font-size: 10px;
+    color: #fff;
+}
+
+.videoMode {
+    position: relative;
+    height: 5760px;
+    width: 1080px;
+    display: block;
+
+    .video {
+        object-fit: cover;
+        position: absolute;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 5760px;
+        width: 1080px;
+    }
 }

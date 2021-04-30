@@ -11,7 +11,7 @@
     </div>
     <div class="sectionTitle">
         <transition name="fadeY" mode="out-in">
-            <h1 v-if="$store.state.story == null && $store.state.view == 'storySelect'" class="text-9xl font-normal animateTitle">Select a story to explore</h1>
+            <h1 v-if="$store.state.story == null && $store.state.view == 'storySelect'" class="text-9xl font-light animateTitle">Select a story to explore...</h1>
             <div :class="routeName" v-if="$store.state.story !== null" v-html="story.heading" :key="tKey" class="font-normal animateTitle">
             </div>
         </transition>
@@ -132,7 +132,7 @@ header {
     width: 100%;
     color: #fff;
     position: absolute;
-    bottom: 0;
+    bottom: 70px;
     padding: 0 100px;
 }
 </style>
