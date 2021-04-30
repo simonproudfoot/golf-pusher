@@ -1,46 +1,41 @@
 var m = 2; // should be 20
 const version = 'pusher'
 var working = false
-if (version == 'pusher-client') {
-    console.log('Pusher server initiated')
-    const Pusher = require("pusher");
-    const pusher = new Pusher({
-        appId: "1111793",
-        key: "f01ccdabee9849cb6558",
-        secret: "621b33db317330a7ec24",
-        cluster: "eu",
-        useTLS: false
-    });
+// if (version == 'pusher-client') {
+//     console.log('Pusher server initiated')
+//     const Pusher = require("pusher");
+//     const pusher = new Pusher({
+//         appId: "1111793",
+//         key: "f01ccdabee9849cb6558",
+//         secret: "621b33db317330a7ec24",
+//         cluster: "eu",
+//         useTLS: false
+//     });
 
 
-
-    var channel = pusher.subscribe('my-channel');
-    channel.bind('incoming', function (data) {
+//     var channel = pusher.subscribe('my-channel');
+//     channel.bind('incoming', function (data) {
       
-        console.log('received')
-    });
+//         console.log('received')
+//     });
 
 
-
-    function countdown() {
-        var current = m--
-        console.log(`Min: ${current}!`);
-        pusher.trigger("my-channel", "oneSecond", {
-            minutes: current
-        });
-    }
-    setInterval(countdown, 60000)
-
-
-}
+//     function countdown() {
+//         var current = m--
+//         console.log(`Min: ${current}!`);
+//         pusher.trigger("my-channel", "oneSecond", {
+//             minutes: current
+//         });
+//     }
+//     setInterval(countdown, 60000)
 
 
-
+// }
 
 
 
 
-if (version == 'local') {
+// if (version == 'local') {
 
     const io = require("socket.io")(3001, {
         cors: {
@@ -88,7 +83,7 @@ if (version == 'local') {
         })
         //     }
     })
-}
+//}
 
 
 

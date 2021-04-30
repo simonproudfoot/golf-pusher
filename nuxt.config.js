@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
 
-  ssr: true, 
+  ssr: true,
 
   head: {
     title: 'golf-nuxt',
@@ -64,14 +64,17 @@ export default {
   io: {
     // module options  
     sockets: [{
+      cors: '*',
       name: 'main',
-      url: 'http://192.168.1.233:3001'
+      //url: 'http://localhost:3000/'
+
+         url: 'ws://golf-totem.herokuapp.com/socket.io/?EIO=4&transport=websocket',
     }]
   },
 
 
   env: {
-    version: 'online' // Also set this in server.js
+    version: 'local' // Also set this in server.js
     // online / pusher 
   },
   styleResources: {
@@ -79,8 +82,8 @@ export default {
   },
 
 
-  //serverMiddleware: ["~/serverMiddleware/socket-io-server.js"],    // ADD IN ONLINE VERSION
-  serverMiddleware: ["~/serverMiddleware/server.js"],   // ADD IN LOCAL NETWORK VERSION
+  serverMiddleware: ["~/serverMiddleware/socket-io-server.js"],    // ADD IN ONLINE VERSION
+  //serverMiddleware: ["~/serverMiddleware/server.js"],   // ADD IN LOCAL NETWORK VERSION
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
